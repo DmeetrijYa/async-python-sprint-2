@@ -16,8 +16,11 @@ import requests
 jobs = deque()
 def loop():
     scheduler = Scheduler(pool_size=10)
+    # multy-job
     job_1 = Job(test_func_1, args=((1, 2), (10, 20)), start_at= datetime.datetime(2023, 7, 26, 20, 56), max_working_time=60, tries=10, dependencies=[])
+    # web-job
     job_2 = Job(test_func_2, args=(('http://ya.ru', 'http://google.ru', 'http://yandex.ru')), start_at= datetime.datetime(2023, 7, 25, 22, 30), max_working_time=120, tries=3, dependencies=[job_1])
+    # fs-job
     job_3 = Job(test_func_3, args=(('./files'), ('./files/new_dir')), max_working_time=180, tries=5, dependencies=[job_2])
     jobs.append(job_1)
     jobs.append(job_2)
