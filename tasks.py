@@ -47,3 +47,4 @@ def fs_job_func(dir: str, pattern: str = '*.*') -> str:
     for line in lines:
         result += line
     return result
+

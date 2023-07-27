@@ -9,16 +9,16 @@ def testing():
         assert multy_job_func(range(5)) == 10
         assert multy_job_func((5, 10)) != 16
         assert isinstance(multy_job_func((5, 5)), int)
-        logger.debug(f'Test for multy_job_func complete')
+        logger.debug(f'Test for multy_job_func completed')
 
     def test_web_job_func():
         assert 200 <= int(web_job_func().status_code) < 300
         assert isinstance(web_job_func().status_code, int)
-        logger.debug(f'Test for web_job_func complete')
+        logger.debug(f'Test for web_job_func completed')
 
     def test_fs_job_func():
         assert isinstance(fs_job_func('./files'), str)
-        logger.debug(f'Test for fs_job_func complete')
+        logger.debug(f'Test for fs_job_func completed')
 
     def test_job():
         test_job = Job(multy_job_func, args=(range(5),),
@@ -26,7 +26,7 @@ def testing():
         assert test_job.args == (range(5),)
         _, _, result = next(test_job.run())
         assert result == 10
-        logger.debug('Test for class Job complete')
+        logger.debug('Test for class Job completed')
 
     def test_scheduler():
         scheduler = Scheduler(pool_size=1)
@@ -36,7 +36,7 @@ def testing():
         scheduler.put_tasks(test_job)
         scheduler.run()
         assert test_job.state.get('result') == 10
-        logger.debug('Test for class Scheduler complete')
+        logger.debug('Test for class Scheduler completed')
 
     test_multy_job_func()
     test_web_job_func()
@@ -49,3 +49,4 @@ def testing():
 
 if __name__ == '__main__':
     testing()
+

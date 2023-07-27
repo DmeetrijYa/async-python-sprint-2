@@ -25,3 +25,4 @@ if __name__ == '__main__':
         scheduler.run()
     except (ValueError, IndexError) as e:
         logger.info(e)
+

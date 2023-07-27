@@ -24,7 +24,7 @@ class Job:
                  args: tuple = None,
                  kwargs: dict = None,
                  start_at: datetime.datetime = None,
-                 max_working_time: int = -1,
+                 max_working_time: int = None,
                  tries: int = None,
                  dependencies: list = None,
                  state: dict = None):

@@ -98,3 +98,4 @@ class Scheduler:
     def stop(self):
         with open('tasks_suspended.inf', 'w') as file:
             file.write(self.tasks_dump())
+
