@@ -29,14 +29,8 @@ class Job:
                  dependencies: list = None,
                  state: dict = None):
         self.target = target
-        if tries is None:
-            self.tries: int = 10
-        else:
-            self.tries: int = tries
-        if args is None:
-            self.args: tuple = ()
-        else:
-            self.args: tuple = args
+        self.tries = tries
+        self.args = args
         if kwargs is None:
             self.kwargs: dict = {}
         else:
@@ -45,10 +39,7 @@ class Job:
             self.start_at = datetime.datetime.now()
         else:
             self.start_at = start_at
-        if max_working_time is None:
-            self.max_working_time = 120
-        else:
-            self.max_working_time = max_working_time
+        self.max_working_time = max_working_time
         if dependencies is None:
             self.dependencies: list['Job'] = []
         else:
@@ -115,15 +106,15 @@ class Job:
             self.state['completed'] = True
             self.state['end_at'] = time.time()
             yield status, self.state
-        except Exception as e:
-            logger.info("Task done")
+        except StopIteration as e:
+            logger.info(e)
 
     def pause(self):
         pass
 
     def stop(self):
         with open('tasks.inf', 'w') as file:
-            json.dumps(self.state)
+            json.dump(self.state, file)
 
     def check_completion(self):
         return self.state.get('completed')
